@@ -1,0 +1,99 @@
+# -*- coding: utf-8 -*-
+
+import torch
+
+from onmt.inputters.dataset_base import DatasetBase
+
+
+class TextDataset(DatasetBase):
+    """
+    Build `Example` objects, `Field` objects, and filter_pred function
+    from text corpus.
+
+    Args:
+        fields (dict): a dictionary of `torchtext.data.Field`.
+            Keys are like 'src', 'tgt', 'src_map', and 'alignment'.
+        src_examples_iter (dict iter): preprocessed source example
+            dictionary iterator.
+        tgt_examples_iter (dict iter): preprocessed target example
+            dictionary iterator.
+        dynamic_dict (bool)
+    """
+    data_type = 'text'  # get rid of this class attribute asap
+
+    # @staticmethod
+    # def sort_key(ex):
+    #     if hasattr(ex, "tgt"):
+    #         return len(ex.src), len(ex.tgt)
+    #     return len(ex.src)
+
+    @staticmethod
+    def sort_key(ex):
+        # changed by wchen, the above is the original one.
+        # src
+        if type(ex.src[0]) is not list:
+            src_sort_key = len(ex.src)
+        else:
+            src_sort_key = sum([len(sent_i) for sent_i in ex.src])
+
+        tgt_sort_key = None
+        if hasattr(ex, "tgt"):
+            if type(ex.tgt[0]) is not list:
+                tgt_sort_key = len(ex.tgt)
+            else:
+                tgt_sort_key = sum([len(sent_i) for sent_i in ex.tgt])
+
+        if tgt_sort_key is not None:
+            return src_sort_key, tgt_sort_key
+        return src_sort_key
+
+    @staticmethod
+    def collapse_copy_scores(scores, batch, tgt_vocab, src_vocabs,
+                             batch_dim=1, batch_offset=None):
+        """
+        Given scores from an expanded dictionary
+        corresponeding to a batch, sums together copies,
+        with a dictionary word when it is ambiguous.
+        """
+        offset = len(tgt_vocab)
+        for b in range(scores.size(batch_dim)):
+            blank = []
+            fill = []
+            batch_id = batch_offset[b] if batch_offset is not None else b
+            index = batch.indices.data[batch_id]
+            src_vocab = src_vocabs[index]
+            for i in range(1, len(src_vocab)):
+                sw = src_vocab.itos[i]
+                ti = tgt_vocab.stoi[sw]
+                if ti != 0:
+                    blank.append(offset + i)
+                    fill.append(ti)
+            if blank:
+                blank = torch.Tensor(blank).type_as(batch.indices.data)
+                fill = torch.Tensor(fill).type_as(batch.indices.data)
+                score = scores[:, b] if batch_dim == 1 else scores[b]
+                score.index_add_(1, fill, score.index_select(1, blank))
+                score.index_fill_(1, blank, 1e-10)
+        return scores
+
+    @classmethod
+    def make_examples(cls, sequences, side):
+        """
+        Args:
+            sequences: path to corpus file or iterable
+            truncate (int): maximum sequence length (0 for unlimited).
+            side (str): "src" or "title" or "tgt".
+
+        Yields:
+            dictionaries whose keys are the names of fields and whose
+            values are more or less the result of tokenizing with those
+            fields.
+        """
+        if isinstance(sequences, str):
+            sequences = cls._read_file(sequences)
+        for i, seq in enumerate(sequences):
+            yield {side: seq, "indices": i}
+
+    @property
+    def can_copy(self):
+        return "src_map" in self.fields and "alignment" in self.fields
