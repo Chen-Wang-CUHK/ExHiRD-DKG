@@ -42,11 +42,11 @@ Download the [processed testing datasets](https://www.dropbox.com/s/tavebz23va1h
 
 # Evaluate the predictions
 After specifying the corret path of the predictions and testing datasets in the `sh/evaluation/evaluate_ExHiRD_h.sh` and `sh/evaluation/evaluate_ExHiRD_h.sh`, you can run the following command lines to evaluate the predictions of ExHiRD-h and ExHiRD-s:
-'''
+```
 cd sh/evaluation/
 sh evaluate_ExHiRD_h.sh
 sh evaluate_ExHiRD_s.sh
-'''
+```
 
 All the post-processing steps (including removing duplicated predictions, restricting the maximum number of single-word predictions (if set), and filtering predictions which contain dot, comma, or unk token.) and evaluation metrics are integrated in `evaluation_utils.py`.
 The standard Macro-averaged F1@5 (i.e. Macro std_F1@5) and F1@M (i.e. Macro std_F1@M) are reported in the paper.
