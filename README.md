@@ -1,6 +1,13 @@
 # ExHiRD-DKG
 code for ACL 2020 paper [Exclusive Hierarchical Decoding for Deep Keyphrase Generation](https://arxiv.org/pdf/2004.08511.pdf)
-# The code will be released soon.
+
+# Table of contents
+   * [Citation](#citation)
+   * [Dependencies](#dependencies)
+   * [Get the processed train/val/test datasets](#get-the-processed-train/val/test-datasets)
+   * How to use the code? (these parts are still under updating.)
+   * [Evaluate the predictions](#evaluate-the-predictions)
+   * [Download our final predictions](#download-our-final-predictions)
 
 # Citation
 You can cite our paper by:
@@ -22,13 +29,6 @@ You can cite our paper by:
   bibsource = {dblp computer science bibliography, https://dblp.org}
 }
 ```
-# Table of contents
-   * [Dependencies](#dependencies)
-   * [Get the processed train/val/test datasets](#get-the-processed-train/val/test-datasets)
-   * How to use the code? (these parts are still under updating.)
-   * [Evaluate the predictions](#evaluate-the-predictions)
-   * [Download our final predictions](#download-our-final-predictions)
-   * [Citation](#citation)
 
 # Dependencies
 - python 3.6.8
