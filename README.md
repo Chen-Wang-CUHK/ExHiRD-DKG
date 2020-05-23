@@ -6,7 +6,8 @@ code for ACL 2020 paper [Exclusive Hierarchical Decoding for Deep Keyphrase Gene
    * [Dependencies](#dependencies)
    * [Get the processed train/val/test datasets](#get-the-processed-train/val/test-datasets)
    * [Process training and validation data to ONMT style](#process-training-and-validation-data-to-onmt-style)
-   * How to use the code? (these parts are still under updating.)
+   * [Training](#training)
+   * [Testing](#testing)
    * [Evaluate the predictions](#evaluate-the-predictions)
    * [Download our final predictions](#download-our-final-predictions)
 
@@ -57,6 +58,33 @@ cd sh/preprocess/
 sh preprocess_kp20k_seqE_HRD_PbfA_ordered_addBiSTokens_addSemicolon_RmStemDups_RmKeysAllUnk.sh
 ```
 Next, download the [vocabulary](https://www.dropbox.com/s/a7ivosx29cnpson/full_processed_kp20k.vocab.pt?dl=0) file into the onmt-processed data folder: `data/train_valid_dataset/onmt_processed_data/with_copy_seqE_HRD_PbfA_ordered_addBiSTokens_addSemicolon_RmStemDups_RmKeysAllUnk`. Then, the processing is finished.
+
+# Training
+Train an ExHiRD-h model:
+```
+cd sh/ExHiRD/
+sh ExHiRD_h_seed343_PbfA_ordered_addBiSTokens_addSemicolon_RmStemDups_RmKeysAllUnk_train.sh
+```
+Train an ExHiRD-s model:
+```
+cd sh/ExHiRD/
+sh ExHiRD_s_seed3435_PbfA_ordered_addBiSTokens_addSemicolon_RmStemDups_RmKeysAllUnk_train.sh
+```
+You may need to set `CUDA_VISIBLE_DEVICES` in these bash files to run them smoothly.
+
+# Testing
+Test a trained ExHiRD-h model:
+```
+cd sh/ExHiRD/
+sh ExHiRD_h_seed343_history1_4_PbfA_ordered_addBiSTokens_addSemicolon_RmStemDups_RmKeysAllUnk_translate.sh
+```
+Test a trained ExHiRD-s model:
+```
+cd sh/ExHiRD/
+sh ExHiRD_s_seed3435_PbfA_ordered_addBiSTokens_addSemicolon_RmStemDups_RmKeysAllUnk_translate.sh
+```
+You may need to set `CUDA_VISIBLE_DEVICES` in these bash files to run them smoothly. The evaluation of the predictions is also integrated in this step and the evaluation results are stored in the corresponding log files.
+
 
 # Evaluate the predictions
 After specifying the corret path of the predictions and testing datasets in the `sh/evaluation/evaluate_ExHiRD_h.sh` and `sh/evaluation/evaluate_ExHiRD_h.sh`, you can run the following command lines to evaluate the predictions of ExHiRD-h and ExHiRD-s:
