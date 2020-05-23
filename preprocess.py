@@ -64,31 +64,24 @@ def build_save_dataset(corpus_type, fields, opt):
     if corpus_type == 'train':
         src = opt.train_src
         tgt = opt.train_tgt
-        # add by wchen
-        title = opt.train_title
     else:
         src = opt.valid_src
         tgt = opt.valid_tgt
-        # add by wchen
-        title = opt.valid_title
 
-    logger.info("Reading source and target files: %s %s %s." % (src, tgt, title))
+    logger.info("Reading source and target files: %s %s." % (src, tgt))
 
     src_shards = split_corpus(src, opt.shard_size)
-    title_shards = split_corpus(title, opt.shard_size)
     tgt_shards = split_corpus(tgt, opt.shard_size)
-    shard_pairs = zip(src_shards, title_shards, tgt_shards)
+    shard_pairs = zip(src_shards, tgt_shards)
     dataset_paths = []
 
     total_valid_ex_num = 0
-    for i, (src_shard, title_shard, tgt_shard) in enumerate(shard_pairs):
+    for i, (src_shard, tgt_shard) in enumerate(shard_pairs):
         assert len(src_shard) == len(tgt_shard)
-        assert len(src_shard) == len(title_shard)
         logger.info("Building shard %d." % i)
         dataset = inputters.build_dataset(
             fields, opt.data_type,
             src=src_shard,
-            title=title_shard,
             tgt=tgt_shard,
             src_dir=opt.src_dir,
             src_seq_len=opt.src_seq_length,

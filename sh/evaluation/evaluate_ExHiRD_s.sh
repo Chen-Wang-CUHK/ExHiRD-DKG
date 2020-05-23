@@ -1,7 +1,7 @@
 # /bin/bash
 
 # change to the absolute path to HRED-DKG
-home_dir=/apdcephfs/common/rickywchen/code/HRED_KG_SUM
+home_dir="/apdcephfs/common/rickywchen/code/ExHiRD-DKG/"
 
 cd ${home_dir}
 
