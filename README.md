@@ -1,7 +1,7 @@
 # ExHiRD-DKG
 The source code for the ACL 2020 paper [Exclusive Hierarchical Decoding for Deep Keyphrase Generation](https://arxiv.org/pdf/2004.08511.pdf)
 
-<p align="center"><img width="80%" src="figs/ExHiRD.PNG" /></p>
+<p align="center"><img width="100%" src="figs/ExHiRD.PNG" /></p>
 
 # Table of contents
    * [Citation](#citation)
