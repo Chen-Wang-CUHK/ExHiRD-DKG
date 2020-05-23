@@ -5,6 +5,7 @@ code for ACL 2020 paper [Exclusive Hierarchical Decoding for Deep Keyphrase Gene
    * [Citation](#citation)
    * [Dependencies](#dependencies)
    * [Get the processed train/val/test datasets](#get-the-processed-train/val/test-datasets)
+   * [Process training and validation data to ONMT style](#process-training-and-validation-data-to-onmt-style)
    * How to use the code? (these parts are still under updating.)
    * [Evaluate the predictions](#evaluate-the-predictions)
    * [Download our final predictions](#download-our-final-predictions)
@@ -39,6 +40,23 @@ The full dependencies are listed in `Requirements.txt`.
 
 # Get the processed train/val/test datasets
 Download the [processed testing datasets](https://www.dropbox.com/s/tavebz23va1hvrd/ExHiRD_test_datasets.zip?dl=1).
+Download the [processed train_valid_dataset](https://www.dropbox.com/s/5sbwt2k66nly1ib/ExHiRD_train_valid_dataset.zip?dl=1).
+
+The words in the file name have the following meanings:
+  - `PbfA_ordered`: the present keyphrases are put in front of the absent keyphrases. The present keyphrases are sorted by their positions of the first appearance.
+  - `addBiStokens`: One start token is added to each present keyphrase and The other start token is added to each absent keyphrase.
+  - `addSemicolon`: For each keyphrase, we add `;` as the ending token.
+  - `RmStemDups`: The duplicated keyphrases (after stemming) is removed.
+  - `RmKeysAllUnk`: After building the vocabulary, we remove the absent keyphrases in which every token is in neither the vocabulary nor the source input. 
+
+# Process training and validation data to ONMT style
+Create a new folder `data` under the home folder (i.e., ExHiRD-DKG), download the [processed train_valid_dataset](https://www.dropbox.com/s/5sbwt2k66nly1ib/ExHiRD_train_valid_dataset.zip?dl=1) into `data`, unzip the `.zip` file.
+Run the following command lines to process the data into ONMT style:
+```
+cd sh/preprocess/
+sh preprocess_kp20k_seqE_HRD_PbfA_ordered_addBiSTokens_addSemicolon_RmStemDups_RmKeysAllUnk.sh
+```
+Next, download the [vocabulary](https://www.dropbox.com/s/a7ivosx29cnpson/full_processed_kp20k.vocab.pt?dl=0) file into the onmt-processed data folder: `data/train_valid_dataset/onmt_processed_data/with_copy_seqE_HRD_PbfA_ordered_addBiSTokens_addSemicolon_RmStemDups_RmKeysAllUnk`. Then, the processing is finished.
 
 # Evaluate the predictions
 After specifying the corret path of the predictions and testing datasets in the `sh/evaluation/evaluate_ExHiRD_h.sh` and `sh/evaluation/evaluate_ExHiRD_h.sh`, you can run the following command lines to evaluate the predictions of ExHiRD-h and ExHiRD-s:
