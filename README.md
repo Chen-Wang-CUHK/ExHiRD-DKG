@@ -65,7 +65,7 @@ Next, download the [vocabulary](https://www.dropbox.com/s/a7ivosx29cnpson/full_p
 Train an ExHiRD-h model:
 ```
 cd sh/ExHiRD/
-sh ExHiRD_h_seed343_PbfA_ordered_addBiSTokens_addSemicolon_RmStemDups_RmKeysAllUnk_train.sh
+sh ExHiRD_h_seed3435_PbfA_ordered_addBiSTokens_addSemicolon_RmStemDups_RmKeysAllUnk_train.sh
 ```
 Train an ExHiRD-s model:
 ```
@@ -78,7 +78,7 @@ You may need to set `CUDA_VISIBLE_DEVICES` in these bash files to run them smoot
 Test a trained ExHiRD-h model:
 ```
 cd sh/ExHiRD/
-sh ExHiRD_h_seed343_history1_4_PbfA_ordered_addBiSTokens_addSemicolon_RmStemDups_RmKeysAllUnk_translate.sh
+sh ExHiRD_h_seed3435_history1_4_PbfA_ordered_addBiSTokens_addSemicolon_RmStemDups_RmKeysAllUnk_translate.sh
 ```
 Test a trained ExHiRD-s model:
 ```
