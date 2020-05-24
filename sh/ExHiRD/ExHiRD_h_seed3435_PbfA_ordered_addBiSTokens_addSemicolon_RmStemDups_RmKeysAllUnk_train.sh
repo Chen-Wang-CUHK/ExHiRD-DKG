@@ -1,11 +1,11 @@
 #!/bin/bash
-#SBATCH --job-name=ExHiRD_h_seed343_seqE2_PbfA_ordered_addBiSTokens_addSemicolon_RmStemDups_RmKeysAllUnk_train
+#SBATCH --job-name=ExHiRD_h_seed3435_seqE2_PbfA_ordered_addBiSTokens_addSemicolon_RmStemDups_RmKeysAllUnk_train
 #SBATCH --mail-user=wangzaicuhk@gmail.com
 #SBATCH --mail-type=ALL
-#SBATCH --output=/research/king3/wchen/Code4Git/ExHiRD-DKG/sh/ExHiRD/sh_log/ExHiRD_h_seed343_PbfA_ordered_addBiSTokens_addSemicolon_RmStemDups_RmKeysAllUnk_train.log
+#SBATCH --output=/research/king3/wchen/Code4Git/ExHiRD-DKG/sh/ExHiRD/sh_log/ExHiRD_h_seed3435_PbfA_ordered_addBiSTokens_addSemicolon_RmStemDups_RmKeysAllUnk_train.log
 #SBATCH --gres=gpu:1
 #SBATCH -p gpu_24h
-#SBATCH -w gpu4
+#SBATCH -w gpu22
 
 home_dir=/research/king3/wchen/Code4Git/ExHiRD-DKG/
 cd ${home_dir}
@@ -15,7 +15,7 @@ cd ${home_dir}
 
 model_name="ExHiRD_h"
 processed_type="PbfA_ordered_addBiSTokens_addSemicolon_RmStemDups_RmKeysAllUnk"
-seed=343
+seed=3435
 
 model_save_dir="saved_models/${model_name}_seed${seed}_${processed_type}/"
 mkdir -p ${model_save_dir}
@@ -60,7 +60,6 @@ echo "=============================${model_name}_seed${seed}====================
 -dec_layers=1 \
 -save_model=${model_save_dir}/${model_name}_seed${seed}_${processed_type} \
 -log_file=${log_dir}/${model_name}_seed${seed}_${processed_type}_train.log
-
 
 # select the best model and remove others
 # if you do not want to remove the intermediate models, please comment the following lines
