@@ -59,7 +59,9 @@ Run the following command lines to process the data into ONMT style:
 cd sh/preprocess/
 sh preprocess_kp20k_seqE_HRD_PbfA_ordered_addBiSTokens_addSemicolon_RmStemDups_RmKeysAllUnk.sh
 ```
-Next, download the [vocabulary](https://www.dropbox.com/s/a7ivosx29cnpson/full_processed_kp20k.vocab.pt?dl=0) file into the onmt-processed data folder: `data/train_valid_dataset/onmt_processed_data/with_copy_seqE_HRD_PbfA_ordered_addBiSTokens_addSemicolon_RmStemDups_RmKeysAllUnk`. Then, the processing is finished.
+Next, download the [vocabulary](https://www.dropbox.com/s/a7ivosx29cnpson/full_processed_kp20k.vocab.pt?dl=0) file into the onmt-processed data folder: `data/train_valid_dataset/onmt_processed_data/with_copy_seqE_HRD_PbfA_ordered_addBiSTokens_addSemicolon_RmStemDups_RmKeysAllUnk`. Then, the processing is finished. 
+
+**Note:** To run all bash files smoothly, you may need to specify the correct `home_dir` (i.e., the absolute path to ExHiRD-DKG) and replace the python path to yours.
 
 # Training
 Train an ExHiRD-h model:
