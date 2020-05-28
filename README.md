@@ -11,7 +11,7 @@ The source code for the ACL 2020 paper [Exclusive Hierarchical Decoding for Deep
    * [Training](#training)
    * [Testing](#testing)
    * [Evaluate the predictions](#evaluate-the-predictions)
-   * [Download our final predictions](#download-our-final-predictions)
+   * [Download our raw final predictions](#download-our-raw-final-predictions)
 
 # Citation
 You can cite our paper by:
@@ -102,5 +102,5 @@ All the post-processing steps (including removing duplicated predictions, restri
 The standard Macro-averaged F1@5 (i.e. Macro std_F1@5) and F1@M (i.e. Macro std_F1@M) are reported in the paper.
 
 
-# Download our final predictions
+# Download our raw final predictions
 You can download our [raw final predictions](https://www.dropbox.com/s/29wu7omj1vnsbxb/ExHiRD_final_predictions.zip?dl=1) of our ExHiRD-h and ExHiRD-s methods for the four testing datasets. In the folder, `historyK` means the window size of exclusive search is set as K. The prediction post-processing is integrated in `evaluation_utils.py` including removing duplicated predictions, restricting the maximum number of single-word predictions (if set), and filtering predictions which contain dot, comma, or unk token.
