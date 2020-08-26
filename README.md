@@ -59,7 +59,7 @@ Run the following command lines to process the data into ONMT style:
 cd sh/preprocess/
 sh preprocess_kp20k_seqE_HRD_PbfA_ordered_addBiSTokens_addSemicolon_RmStemDups_RmKeysAllUnk.sh
 ```
-Next, download the [vocabulary](https://www.dropbox.com/s/a7ivosx29cnpson/full_processed_kp20k.vocab.pt?dl=1) file into the onmt-processed data folder: `data/train_valid_dataset/onmt_processed_data/with_copy_seqE_HRD_PbfA_ordered_addBiSTokens_addSemicolon_RmStemDups_RmKeysAllUnk`. Then, the processing is finished. The given "vocab.pt" is the built vocab before "RmKeysAllUnk". We performed "RmKeysAllUnk" based on the given vocab and choose the given vocab as the final vocab. If we generate the vocab after "RmKeysAllUnk", the "RmKeysAllUnk" may be meaningless since some keyphrases may become all unks based on the generated new vocab.
+Next, download the [vocabulary](https://www.dropbox.com/s/a7ivosx29cnpson/full_processed_kp20k.vocab.pt?dl=1) file into the onmt-processed data folder: `data/train_valid_dataset/onmt_processed_data/with_copy_seqE_HRD_PbfA_ordered_addBiSTokens_addSemicolon_RmStemDups_RmKeysAllUnk`. Then, the processing is finished. The given "vocab.pt" is the built vocab before "RmKeysAllUnk". We performed "RmKeysAllUnk" based on the given vocab and chose the given vocab as the final vocab. If we generate the vocab after "RmKeysAllUnk", the "RmKeysAllUnk" may be meaningless since some keyphrases may become all unks based on the generated new vocab.
 
 **Note:** To run all bash files smoothly, you may need to specify the correct `home_dir` (i.e., the absolute path to ExHiRD-DKG) and replace the python path to yours.
 
