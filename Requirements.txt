@@ -14,7 +14,7 @@ mock==3.0.5
 nltk==3.4.4
 numpy==1.16.4
 Pillow==6.1.0
-protobuf==3.8.0
+protobuf==3.18.3
 psutil==5.6.3
 requests==2.22.0
 six==1.12.0
